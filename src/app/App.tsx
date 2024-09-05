@@ -1,15 +1,23 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 
 import "../style/global.css";
+import logo from "../icons/logo.svg";
+import Header from "../componets/header/Header";
+import { routes } from "../routes/routes";
+import Products from "../pages/Products";
 
 const App = () => {
   return (
-    <div className="font-b">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quod
-      fugit ut veritatis rem perspiciatis enim? Odit atque ipsum iure
-      repellendus molestias, incidunt facere blanditiis quod velit eius
-      necessitatibus laboriosam?
-    </div>
+    <>
+      <Header />
+      <hr />
+      <div className="container">
+        <Routes>
+          <Route path={routes.products} element={<Products />}></Route>
+        </Routes>
+      </div>
+    </>
   );
 };
 
