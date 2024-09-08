@@ -7,7 +7,11 @@ import shield from "../../icons/shield.svg";
 interface MotivationBlockProps {}
 
 const MotivationBlock = (props: MotivationBlockProps) => {
-  const infoMotivationBlock = [
+  const infoMotivationBlock: Array<{
+    image: string;
+    title: string;
+    description: string;
+  }> = [
     {
       image: truck,
       title: "Привезём из-за границы",
@@ -28,7 +32,7 @@ const MotivationBlock = (props: MotivationBlockProps) => {
   ];
 
   return (
-    <div className="">
+    <div>
       {infoMotivationBlock.map((item, index) => (
         <div key={index} className="flex gap-4 mb-5">
           <img src={item.image} alt="img" />

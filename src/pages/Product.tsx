@@ -5,6 +5,8 @@ import style from "../style/product.module.css";
 import { useGetProductQuery } from "../api/product";
 import arrow from "../icons/arrow.svg";
 import MotivationBlock from "../componets/motivationBlock/MotivationBlock";
+import ProductSizePopup from "../componets/popups/ProductSizePopup";
+import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
 
 interface ProductProps {}
 
@@ -36,6 +38,10 @@ const Product = (props: ProductProps) => {
 
   const [currentimage, setCurrentImage] = useState<string>("");
 
+  const [showSizeProduct, setShowSizeProduct] = useState<boolean>(false);
+
+  const [showInfoProduct, setShowInfoProduct] = useState<boolean>(false);
+
   useEffect(() => {
     if (data?.imageUrl && data.imageUrl.length > 0) {
       setCurrentImage(data.imageUrl[0]);
@@ -44,6 +50,16 @@ const Product = (props: ProductProps) => {
 
   return (
     <div className="container">
+      <ProductSizePopup
+        showSizeProduct={showSizeProduct}
+        closePopup={() => setShowSizeProduct(false)}
+      />
+      <ProductInfoPopup
+        showInfoProduct={showInfoProduct}
+        closePopup={() => setShowInfoProduct(false)}
+        title={data?.title}
+        peculiarities={data?.peculiarities}
+      />
       <div className={style.product}>
         <div className={style.product_left_side}>
           <img src={currentimage} alt={data?.title} />
@@ -75,7 +91,10 @@ const Product = (props: ProductProps) => {
             ))}
           </ul>
 
-          <button className="mt-4 flex items-center font-bold">
+          <button
+            className="mt-4 flex items-center font-bold"
+            onClick={() => setShowInfoProduct(true)}
+          >
             <div className="pr-1 underline">Показать еще</div>
             <img src={arrow} alt="arrow" />
           </button>
@@ -85,7 +104,7 @@ const Product = (props: ProductProps) => {
             Размер лучше посмотреть на язычке ваших кроссовок или измерить
             стельку.
           </div>
-          <div className="flex flex-wrap my-3 gap-3">
+          <div className="flex flex-wrap my-5 gap-3">
             {sizeProduct.map((item, index) => (
               <div
                 key={index}
@@ -99,7 +118,9 @@ const Product = (props: ProductProps) => {
             ))}
           </div>
           <button className=" flex items-center">
-            <div className="underline">Таблица размеров</div>
+            <div className="underline" onClick={() => setShowSizeProduct(true)}>
+              Таблица размеров
+            </div>
           </button>
           <hr className="my-6" />
           <div className="font-bold text-[22px]">Выберите как привезти</div>
@@ -107,7 +128,7 @@ const Product = (props: ProductProps) => {
             {deliveryType.map((item, index) => (
               <div
                 key={index}
-                className={`p-4 ${
+                className={`p-4 cursor-pointer  ${
                   currentDeliveryType === index
                     ? "border border-black"
                     : "border"
