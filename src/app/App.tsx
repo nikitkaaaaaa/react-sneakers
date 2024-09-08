@@ -5,6 +5,7 @@ import "../style/global.css";
 import Header from "../componets/header/Header";
 import { routes } from "../routes/routes";
 import Products from "../pages/Products";
+import Product from "../pages/Product";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path={routes.products} element={<Products />}></Route>
+          <Route path={routes.product} element={<Product />}></Route>
         </Routes>
       </div>
     </>

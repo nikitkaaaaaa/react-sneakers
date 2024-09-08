@@ -1,0 +1,39 @@
+.product{
+    display: flex;
+    margin-top: 22px;
+}
+
+.product_left_side{
+    width: 50%;
+}
+
+.product_rigth_side{
+    width: 50%;
+    padding-top: 40px;
+    margin-right: 25px;
+    margin-left: 73px;
+}
+
+.info_for_sneakers{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+
+}
+
+.dot{
+    margin: 8px 0px;
+}
+
+.info_for_sneakers .dot::before {
+    content: ""; 
+    display: inline-block; 
+    width: 5px; 
+    height: 5px; 
+    background-color: black; 
+    border-radius: 50%; 
+    margin-right: 10px;
+    margin-bottom: 3px;
+}

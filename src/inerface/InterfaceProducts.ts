@@ -4,4 +4,5 @@ export default interface InterfaceProducts {
   price: number;
   title: string;
   brand: string;
+  peculiarities: string[];
 }
