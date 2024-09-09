@@ -6,8 +6,12 @@ export const products = createApi({
   reducerPath: "products",
   baseQuery: fetchBaseQuery({ baseUrl: "https://9fa124965a5b597b.mokky.dev/" }),
   endpoints: (builder) => ({
-    getProducts: builder.query<InterfaceProducts[], void>({
-      query: () => "products",
+    getProducts: builder.query<
+      InterfaceProducts[],
+      { choise: string; category: string }
+    >({
+      query: ({ choise, category }) =>
+        `products?sortBy=${choise}&category=${category}`,
     }),
   }),
 });

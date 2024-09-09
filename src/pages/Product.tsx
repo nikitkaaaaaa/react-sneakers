@@ -13,7 +13,7 @@ interface ProductProps {}
 const Product = (props: ProductProps) => {
   const { id } = useParams<{ id: string }>();
 
-  const { data } = useGetProductQuery(Number(id));
+  const { data, isLoading } = useGetProductQuery(Number(id));
 
   const sizeProduct: number[] = [
     38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 45.5, 46, 47.5,
@@ -47,6 +47,9 @@ const Product = (props: ProductProps) => {
       setCurrentImage(data.imageUrl[0]);
     }
   }, [data]);
+
+  if (isLoading)
+    return <div className="text-center font-bold text-5xl">loading</div>;
 
   return (
     <div className="container">

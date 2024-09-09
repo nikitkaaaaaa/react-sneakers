@@ -6,6 +6,7 @@ import Header from "../componets/header/Header";
 import { routes } from "../routes/routes";
 import Products from "../pages/Products";
 import Product from "../pages/Product";
+import Home from "../pages/Home";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <hr />
       <div>
         <Routes>
+          <Route path={routes.home} element={<Home />}></Route>
           <Route path={routes.products} element={<Products />}></Route>
           <Route path={routes.product} element={<Product />}></Route>
         </Routes>

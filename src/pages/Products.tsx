@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import style from "../style/products.module.css";
 import { useGetProductsQuery } from "../api/products";
 import Card from "../componets/card/Card";
-import ChoiseBrand from "../componets/choiseBrand/ChoiseBrand";
+import { routes } from "../routes/routes";
+import ChoiseBrand from "../componets/ChoiseBrand/ChoiseBrand";
 
 interface ProductsProps {}
 
 const Products = (props: ProductsProps) => {
-  const { data = [] } = useGetProductsQuery();
+  const [choise, setChoise] = useState<string>("-price");
+
+  const [parent, enableAnimations] = useAutoAnimate();
+
+  const location = useLocation();
+
+  const category = location.state?.category || "all";
+
+  const { data = [], isLoading } = useGetProductsQuery({ choise, category });
 
   const brands: string[] = [
     "Vans",
@@ -19,11 +30,14 @@ const Products = (props: ProductsProps) => {
     "Reebok",
   ];
 
+  if (isLoading)
+    return <div className="text-center font-bold text-5xl">loading</div>;
+
   return (
     <>
       <div className="container">
         <div className="text-gray-500  text-sm pt-10 pb-3">
-          <span>Главная</span> / <span>Кроссовки и кеды</span>
+          <Link to={routes.home}>Главная</Link> / <span>Кроссовки и кеды</span>
         </div>
         <div className="text-3xl pb-10">Мужские кроссовки и кеды</div>
       </div>
@@ -31,8 +45,7 @@ const Products = (props: ProductsProps) => {
       <div className="container">
         <div className="flex justify-between items-center mt-8">
           <div className="font-bold">Бренды</div>
-
-          <ChoiseBrand />
+          <ChoiseBrand setChoise={setChoise} />
         </div>
         <div className="flex justify-between mt-3">
           <div className=" w-[20%]">
@@ -45,7 +58,7 @@ const Products = (props: ProductsProps) => {
               </div>
             ))}
           </div>
-          <div className={style.products_block}>
+          <div className={style.products_block} ref={parent}>
             {data.map((item) => (
               <Card key={item.id} {...item} />
             ))}
