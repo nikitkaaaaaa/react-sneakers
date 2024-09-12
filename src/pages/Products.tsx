@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -17,7 +17,19 @@ const Products = (props: ProductsProps) => {
 
   const location = useLocation();
 
-  const category = location.state?.category || "all";
+  const [categoryProductsRU, setCategoryProductsRU] = useState<string>("");
+
+  const category = location.state?.category;
+
+  useEffect(() => {
+    if (category === "Sport sneakers") {
+      setCategoryProductsRU("Обувь для спорта");
+    } else if (category == "Custom sneakers") {
+      setCategoryProductsRU("Кастомные кросовки");
+    } else if (category == "Street sneakers") {
+      setCategoryProductsRU("Кроссовки и кеды");
+    }
+  }, [category]);
 
   const { data = [], isLoading } = useGetProductsQuery({ choise, category });
 
@@ -37,7 +49,8 @@ const Products = (props: ProductsProps) => {
     <>
       <div className="container">
         <div className="text-gray-500  text-sm pt-10 pb-3">
-          <Link to={routes.home}>Главная</Link> / <span>Кроссовки и кеды</span>
+          <Link to={routes.home}>Главная</Link> /{" "}
+          <span>{categoryProductsRU}</span>
         </div>
         <div className="text-3xl pb-10">Мужские кроссовки и кеды</div>
       </div>

@@ -4,9 +4,9 @@ import truck from "../../icons/truck.svg";
 import cube from "../../icons/cube.svg";
 import shield from "../../icons/shield.svg";
 
-interface MotivationBlockProps {}
+interface MotivationBlockProductPageProps {}
 
-const MotivationBlock = (props: MotivationBlockProps) => {
+const MotivationBlockProductPage = (props: MotivationBlockProductPageProps) => {
   const infoMotivationBlock: Array<{
     image: string;
     title: string;
@@ -46,4 +46,4 @@ const MotivationBlock = (props: MotivationBlockProps) => {
   );
 };
 
-export default MotivationBlock;
+export default MotivationBlockProductPage;

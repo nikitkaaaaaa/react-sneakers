@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import style from "../style/product.module.css";
 import { useGetProductQuery } from "../api/product";
 import arrow from "../icons/arrow.svg";
-import MotivationBlock from "../componets/motivationBlock/MotivationBlock";
+
 import ProductSizePopup from "../componets/popups/ProductSizePopup";
 import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
+import MotivationBlockProductPage from "../componets/motivationBlock/MotivationBlockProductPage";
 
 interface ProductProps {}
 
@@ -146,7 +147,7 @@ const Product = (props: ProductProps) => {
             ))}
           </div>
           <hr className="my-6" />
-          <MotivationBlock />
+          <MotivationBlockProductPage />
         </div>
       </div>
     </div>
