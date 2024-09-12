@@ -5,6 +5,7 @@ import style from "../../style/home.module.css";
 import { useGetRandomProductsQuery } from "../../api/randomProducts";
 import { getRandomProducts } from "./randomProductsFunc";
 import { routes } from "../../routes/routes";
+import Card from "../card/Card";
 
 interface RundomProductsBottomProps {}
 
@@ -14,7 +15,7 @@ const RandomProductsBottom = (props: RundomProductsBottomProps) => {
   const randomProducts = getRandomProducts(data, 10);
 
   return (
-    <div className="mt-[150px]">
+    <div className="mt-[180px]">
       <div className="text-center text-3xl font-bold">
         Огромное колличестов кроссовок в каталоге
       </div>
@@ -25,15 +26,7 @@ const RandomProductsBottom = (props: RundomProductsBottomProps) => {
       </div>
       <div className={style.block_rundom_products_bottom}>
         {randomProducts.map((item) => (
-          <Link
-            to={routes.product.replace(":id", String(item.id))}
-            key={item.id}
-            className="block"
-          >
-            <img src={item.imageUrl[0]} alt={item.title} />
-            <div className="font-bold text-lg">{item.price} ₽</div>
-            <div className="text-sm">{item.title}</div>
-          </Link>
+          <Card key={item.id} {...item} />
         ))}
       </div>
     </div>

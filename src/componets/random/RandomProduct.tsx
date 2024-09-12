@@ -15,7 +15,7 @@ const RandomProduct = (props: RundomProductProps) => {
   const randomProduct = getRandomProducts(data, 1)[0];
 
   return (
-    <div className="mt-[50px]">
+    <div className="mt-[150px]">
       <div className="text-3xl">Товар дня</div>
       <div className="flex justify-center">
         <Link to={routes.product.replace(":id", String(randomProduct.id))}>

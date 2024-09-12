@@ -8,6 +8,9 @@ import arrow from "../icons/arrow.svg";
 import ProductSizePopup from "../componets/popups/ProductSizePopup";
 import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
 import MotivationBlockProductPage from "../componets/motivationBlock/MotivationBlockProductPage";
+import { useGetProductsBrandQuery } from "../api/productsBrand";
+import Card from "../componets/card/Card";
+import { getRandomProducts } from "../componets/random/randomProductsFunc";
 
 interface ProductProps {}
 
@@ -15,6 +18,10 @@ const Product = (props: ProductProps) => {
   const { id } = useParams<{ id: string }>();
 
   const { data, isLoading } = useGetProductQuery(Number(id));
+
+  const { data: productsBrand } = useGetProductsBrandQuery(data?.brand ?? "");
+
+  const randomProducts = productsBrand && getRandomProducts(productsBrand, 10);
 
   const sizeProduct: number[] = [
     38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 45.5, 46, 47.5,
@@ -32,7 +39,6 @@ const Product = (props: ProductProps) => {
         "Экспресс-доставка за 9-12 дней. Отдадим в магазине или отправим почтой в ваш город",
     },
   ];
-
   const [currentSize, setCurrentSize] = useState<number>(0);
 
   const [currentDeliveryType, setCurrentDeliveryType] = useState<number>(0);
@@ -94,7 +100,6 @@ const Product = (props: ProductProps) => {
               </li>
             ))}
           </ul>
-
           <button
             className="mt-4 flex items-center font-bold"
             onClick={() => setShowInfoProduct(true)}
@@ -148,7 +153,17 @@ const Product = (props: ProductProps) => {
           </div>
           <hr className="my-6" />
           <MotivationBlockProductPage />
+          <button className=" w-full bg-[#FF385C] text-white py-3 rounded-xl mt-5 mb-12">
+            В корзину
+          </button>
         </div>
+      </div>
+      <hr className="mt-6 mb-10" />
+      <div className="font-bold text-xl">{data?.brand}</div>
+      <div className={style.brand_block}>
+        {randomProducts?.slice(0, 10).map((item) => (
+          <Card key={item.id} {...item} />
+        ))}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@
 
 .product_rigth_side{
     width: 50%;
+    
     padding-top: 40px;
     margin-right: 25px;
     margin-left: 73px;
@@ -37,3 +38,11 @@
     margin-right: 10px;
     margin-bottom: 3px;
 }
+
+.brand_block{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 25px;
+    gap: 20px;
+}
+

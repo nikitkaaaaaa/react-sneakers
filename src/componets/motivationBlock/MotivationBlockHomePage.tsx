@@ -40,8 +40,7 @@ const MotivationBlockHomePage = (props: MotivationBlockHomePageProps) => {
     },
   ];
   return (
-    <div className="mt-[80px]">
-      <div className="mb-16 text-gray-500">О компании</div>
+    <div className="mt-32">
       <div className="text-3xl">Мультибрендовый магазин REACT SNEAKERS</div>
       <div className="my my-10">
         <div>REACT SNEAKERS — ваш источник уникальных кроссовок</div>

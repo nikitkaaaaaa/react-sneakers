@@ -50,7 +50,7 @@ const Home = (props: HomeProps) => {
           />
         </Link>
       </div>
-      <div className="mt-12">
+      <div className="mt-16">
         <div className="text-3xl font-bold mb-5">Только что купили</div>
         <RandomProducts />
       </div>
