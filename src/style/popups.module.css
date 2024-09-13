@@ -49,3 +49,32 @@
     margin-right: 10px;
     margin-bottom: 3px;
 }
+
+.added_product {
+    position: relative;
+    display: flex;
+    width: 360px;
+    margin: 40px;
+    padding: 20px;
+    position: fixed;
+    top: 00px;
+    right: -100%; 
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease, right 0.5s ease;
+    transform: translateX(100%); 
+  }
+  
+  .added_product.active {
+    opacity: 1;
+    transform: translateX(0); 
+    right: 0px; 
+  }
+  
+  .added_product.inactive {
+    opacity: 0;
+    transform: translateX(100%);
+    right: -100%; 
+  }

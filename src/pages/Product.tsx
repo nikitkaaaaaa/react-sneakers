@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import style from "../style/product.module.css";
-import { useGetProductQuery } from "../api/product";
 import arrow from "../icons/arrow.svg";
 
 import ProductSizePopup from "../componets/popups/ProductSizePopup";
 import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
 import MotivationBlockProductPage from "../componets/motivationBlock/MotivationBlockProductPage";
-import { useGetProductsBrandQuery } from "../api/productsBrand";
 import Card from "../componets/card/Card";
 import { getRandomProducts } from "../componets/random/randomProductsFunc";
+import { useGetProductQuery, useGetProductsBrandQuery } from "../api/products";
+import { useAddProductMutation } from "../api/cartProducts";
+import AddedProductPopup from "../componets/popups/AddedProductPopup";
 
 interface ProductProps {}
 
@@ -18,6 +19,8 @@ const Product = (props: ProductProps) => {
   const { id } = useParams<{ id: string }>();
 
   const { data, isLoading } = useGetProductQuery(Number(id));
+
+  const [addProductToCart] = useAddProductMutation();
 
   const { data: productsBrand } = useGetProductsBrandQuery(data?.brand ?? "");
 
@@ -39,6 +42,7 @@ const Product = (props: ProductProps) => {
         "Экспресс-доставка за 9-12 дней. Отдадим в магазине или отправим почтой в ваш город",
     },
   ];
+
   const [currentSize, setCurrentSize] = useState<number>(0);
 
   const [currentDeliveryType, setCurrentDeliveryType] = useState<number>(0);
@@ -48,6 +52,24 @@ const Product = (props: ProductProps) => {
   const [showSizeProduct, setShowSizeProduct] = useState<boolean>(false);
 
   const [showInfoProduct, setShowInfoProduct] = useState<boolean>(false);
+
+  const [addedProduct, setAddedProduct] = useState<boolean>(false);
+
+  const handleAddProductToCart = async () => {
+    setAddedProduct(true);
+    const product = {
+      id: data && data.id,
+      title: data && data.title,
+      price: data && data.price,
+      imageUrl: data && data.imageUrl,
+    };
+
+    try {
+      await addProductToCart(product);
+    } catch (error) {
+      alert(`error ! ${error}`);
+    }
+  };
 
   useEffect(() => {
     if (data?.imageUrl && data.imageUrl.length > 0) {
@@ -69,6 +91,12 @@ const Product = (props: ProductProps) => {
         closePopup={() => setShowInfoProduct(false)}
         title={data?.title}
         peculiarities={data?.peculiarities}
+      />
+      <AddedProductPopup
+        addedProduct={addedProduct}
+        imageUrl={data?.imageUrl[0] ?? ""}
+        title={data?.title ?? ""}
+        handleClosePopupCart={() => setAddedProduct(false)}
       />
       <div className={style.product}>
         <div className={style.product_left_side}>
@@ -153,7 +181,10 @@ const Product = (props: ProductProps) => {
           </div>
           <hr className="my-6" />
           <MotivationBlockProductPage />
-          <button className=" w-full bg-[#FF385C] text-white py-3 rounded-xl mt-5 mb-12">
+          <button
+            className=" w-full bg-[#FF385C] text-white py-3 rounded-xl mt-5 mb-12"
+            onClick={handleAddProductToCart}
+          >
             В корзину
           </button>
         </div>

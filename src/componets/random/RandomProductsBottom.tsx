@@ -1,11 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import style from "../../style/home.module.css";
-import { useGetRandomProductsQuery } from "../../api/randomProducts";
 import { getRandomProducts } from "./randomProductsFunc";
-import { routes } from "../../routes/routes";
 import Card from "../card/Card";
+import { useGetRandomProductsQuery } from "../../api/products";
 
 interface RundomProductsBottomProps {}
 

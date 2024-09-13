@@ -17,7 +17,9 @@ const Header = (props: HeaderProps) => {
           REACT SNEAKERS
         </Link>
         <div>
-          <img src={cart} alt="cart" />
+          <Link to={routes.cart}>
+            <img src={cart} alt="cart" />
+          </Link>
         </div>
       </div>
     </div>

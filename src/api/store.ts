@@ -1,24 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { products } from "./products";
-import { product } from "./product";
-import { randomProducts } from "./randomProducts";
-import { productsBrand } from "./productsBrand";
+import { cartProducts } from "./cartProducts";
 
 const store = configureStore({
   reducer: {
     [products.reducerPath]: products.reducer,
-    [product.reducerPath]: product.reducer,
-    [randomProducts.reducerPath]: randomProducts.reducer,
-    [productsBrand.reducerPath]: productsBrand.reducer,
+    [cartProducts.reducerPath]: cartProducts.reducer,
   },
-  middleware: (m) =>
-    m().concat(
-      products.middleware,
-      product.middleware,
-      randomProducts.middleware,
-      productsBrand.middleware
-    ),
+  middleware: (m) => m().concat(products.middleware, cartProducts.middleware),
 });
 
 export default store;

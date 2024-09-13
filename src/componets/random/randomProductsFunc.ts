@@ -1,4 +1,3 @@
-import { product } from "../../api/product";
 import InterfaceProducts from "../../inerface/InterfaceProducts";
 
 export const getRandomProducts = (

@@ -7,6 +7,7 @@ import { routes } from "../routes/routes";
 import Products from "../pages/Products";
 import Product from "../pages/Product";
 import Home from "../pages/Home";
+import Cart from "../pages/Cart";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path={routes.home} element={<Home />}></Route>
           <Route path={routes.products} element={<Products />}></Route>
           <Route path={routes.product} element={<Product />}></Route>
+          <Route path={routes.cart} element={<Cart />}></Route>
         </Routes>
       </div>
     </>

@@ -13,7 +13,24 @@ export const products = createApi({
       query: ({ choise, category }) =>
         `products?sortBy=${choise}&category=${category}`,
     }),
+
+    getProductsBrand: builder.query<InterfaceProducts[], string>({
+      query: (brand) => `products?brand=${brand}`,
+    }),
+
+    getRandomProducts: builder.query<InterfaceProducts[], void>({
+      query: () => "/products",
+    }),
+
+    getProduct: builder.query<InterfaceProducts, number>({
+      query: (id) => `/products/${id}`,
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = products;
+export const {
+  useGetProductsQuery,
+  useGetProductsBrandQuery,
+  useGetRandomProductsQuery,
+  useGetProductQuery,
+} = products;
