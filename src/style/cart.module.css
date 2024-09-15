@@ -1,0 +1,12 @@
+.block_button_cart{
+    border: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 10px;
+    width: 100px;
+}
+
+.cart-card:not(:first-child) {
+    border-top: 1px solid #e5e5e5; 
+}

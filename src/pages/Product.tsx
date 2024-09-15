@@ -62,6 +62,7 @@ const Product = (props: ProductProps) => {
       title: data && data.title,
       price: data && data.price,
       imageUrl: data && data.imageUrl,
+      size: sizeProduct[currentSize],
     };
 
     try {
@@ -181,8 +182,9 @@ const Product = (props: ProductProps) => {
           </div>
           <hr className="my-6" />
           <MotivationBlockProductPage />
+
           <button
-            className=" w-full bg-[#FF385C] text-white py-3 rounded-xl mt-5 mb-12"
+            className="w-full bg-[#FF385C] text-white py-3 rounded-xl"
             onClick={handleAddProductToCart}
           >
             В корзину
@@ -193,7 +195,11 @@ const Product = (props: ProductProps) => {
       <div className="font-bold text-xl">{data?.brand}</div>
       <div className={style.brand_block}>
         {randomProducts?.slice(0, 10).map((item) => (
-          <Card key={item.id} {...item} />
+          <Card
+            key={item.id}
+            {...item}
+            closePopup={() => setAddedProduct(false)}
+          />
         ))}
       </div>
     </div>

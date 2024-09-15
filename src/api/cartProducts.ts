@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import InterfaceProducts from "../inerface/InterfaceProducts";
+
+import InterfaceCartProducts from "../inerface/InterfaceCartProducts";
 
 export const cartProducts = createApi({
   reducerPath: "cartProducts",
   baseQuery: fetchBaseQuery({ baseUrl: "https://9fa124965a5b597b.mokky.dev/" }),
   endpoints: (builder) => ({
-    getCartProducts: builder.query<InterfaceProducts[], void>({
+    getCartProducts: builder.query<InterfaceCartProducts[], void>({
       query: () => "cart",
     }),
 
