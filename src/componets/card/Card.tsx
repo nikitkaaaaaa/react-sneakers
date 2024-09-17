@@ -8,7 +8,15 @@ interface CardProps extends InterfaceProducts {
   closePopup?: () => void;
 }
 
-const Card = ({ id, imageUrl, price, title, closePopup }: CardProps) => {
+const Card = ({
+  id,
+  imageUrl,
+  price,
+  title,
+  brand,
+  peculiarities,
+  closePopup,
+}: CardProps) => {
   return (
     <Link
       to={routes.product.replace(":id", String(id))}

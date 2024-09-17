@@ -42,7 +42,13 @@ const AddedProductPopup = ({
             isVisible ? style.active : style.inactive
           }`}
         >
-          <Link to={routes.cart} className="flex items-start">
+          <Link
+            to={routes.cart}
+            className="flex items-start"
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
             <div className="w-32">
               <img src={imageUrl} alt="" className="w-32" />
             </div>

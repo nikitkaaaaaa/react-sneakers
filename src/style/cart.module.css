@@ -1,5 +1,5 @@
 .block_button_cart{
-    border: 1px solid #eaeaea;
+    border: 1px solid #E5E7EB;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,5 +8,15 @@
 }
 
 .cart-card:not(:first-child) {
-    border-top: 1px solid #e5e5e5; 
+    border-top: 1px solid #E5E7EB; 
+}
+
+.product_recommendations {
+    display: flex;
+    border-left: 1px solid #E5E7EB;
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
+    padding: 20px 0px 0px 20px;
+    width: 350px;
+    height: 150px;
 }

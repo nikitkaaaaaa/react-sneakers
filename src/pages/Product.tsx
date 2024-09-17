@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import style from "../style/product.module.css";
 import arrow from "../icons/arrow.svg";
-
 import ProductSizePopup from "../componets/popups/ProductSizePopup";
 import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
 import MotivationBlockProductPage from "../componets/motivationBlock/MotivationBlockProductPage";
 import Card from "../componets/card/Card";
 import { getRandomProducts } from "../componets/random/randomProductsFunc";
 import { useGetProductQuery, useGetProductsBrandQuery } from "../api/products";
-import { useAddProductMutation } from "../api/cartProducts";
+import {
+  useAddProductMutation,
+  useGetCartProductsQuery,
+} from "../api/cartProducts";
 import AddedProductPopup from "../componets/popups/AddedProductPopup";
+import { routes } from "../routes/routes";
 
 interface ProductProps {}
 
@@ -20,9 +23,11 @@ const Product = (props: ProductProps) => {
 
   const { data, isLoading } = useGetProductQuery(Number(id));
 
-  const [addProductToCart] = useAddProductMutation();
-
   const { data: productsBrand } = useGetProductsBrandQuery(data?.brand ?? "");
+
+  const { data: cartProducts } = useGetCartProductsQuery();
+
+  const [addProductToCart] = useAddProductMutation();
 
   const randomProducts = productsBrand && getRandomProducts(productsBrand, 10);
 
@@ -56,19 +61,24 @@ const Product = (props: ProductProps) => {
   const [addedProduct, setAddedProduct] = useState<boolean>(false);
 
   const handleAddProductToCart = async () => {
+    if (!data) {
+      return;
+    }
     setAddedProduct(true);
     const product = {
-      id: data && data.id,
-      title: data && data.title,
-      price: data && data.price,
-      imageUrl: data && data.imageUrl,
+      id: Number(id),
+      parentId: Number(id),
+      title: data.title,
+      price: data.price,
+      imageUrl: data.imageUrl,
       size: sizeProduct[currentSize],
+      count: 1,
     };
 
     try {
       await addProductToCart(product);
     } catch (error) {
-      alert(`error ! ${error}`);
+      alert(`Error adding product to cart: ${error}`);
     }
   };
 
@@ -183,12 +193,29 @@ const Product = (props: ProductProps) => {
           <hr className="my-6" />
           <MotivationBlockProductPage />
 
-          <button
-            className="w-full bg-[#FF385C] text-white py-3 rounded-xl"
-            onClick={handleAddProductToCart}
-          >
-            В корзину
-          </button>
+          {cartProducts?.find(
+            (item) =>
+              item.parentId === Number(id) &&
+              item.size === sizeProduct[currentSize]
+          ) ? (
+            <Link to={routes.cart}>
+              <button
+                className="w-full bg-[#FF385C] text-white py-3 rounded-xl"
+                onClick={() => {
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                Товар уже в корзине
+              </button>
+            </Link>
+          ) : (
+            <button
+              className="w-full bg-[#FF385C] text-white py-3 rounded-xl"
+              onClick={handleAddProductToCart}
+            >
+              Добавить товар в корзину
+            </button>
+          )}
         </div>
       </div>
       <hr className="mt-6 mb-10" />
