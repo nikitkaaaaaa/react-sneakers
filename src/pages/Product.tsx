@@ -76,7 +76,7 @@ const Product = (props: ProductProps) => {
     };
 
     try {
-      await addProductToCart(product);
+      await addProductToCart(product).unwrap();
     } catch (error) {
       alert(`Error adding product to cart: ${error}`);
     }

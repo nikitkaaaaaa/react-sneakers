@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 import style from "../../style/cart.module.css";
 import deleteItem from "../../icons/closePopupCart.svg";

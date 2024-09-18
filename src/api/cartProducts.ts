@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import InterfaceCartProducts from "../inerface/InterfaceCartProducts";
+import InterfaceServer from "../inerface/InterfaceServer";
 
 export const cartProducts = createApi({
   reducerPath: "cartProducts",
   baseQuery: fetchBaseQuery({ baseUrl: "https://9fa124965a5b597b.mokky.dev/" }),
-  tagTypes: ["Cart"],
+  tagTypes: ["Cart", "Server"],
   endpoints: (builder) => ({
     getCartProducts: builder.query<InterfaceCartProducts[], void>({
       query: () => "cart",
@@ -52,6 +53,20 @@ export const cartProducts = createApi({
       }),
       invalidatesTags: [{ type: "Cart", id: "LIST" }],
     }),
+
+    addProductsInServer: builder.mutation<void, InterfaceServer>({
+      query: (products) => ({
+        url: "server",
+        method: "POST",
+        body: products,
+      }),
+      invalidatesTags: [{ type: "Server", id: "LIST" }],
+    }),
+
+    getProductsServer: builder.query<InterfaceServer[], void>({
+      query: () => "server",
+      providesTags: [{ type: "Server", id: "LIST" }],
+    }),
   }),
 });
 
@@ -61,4 +76,6 @@ export const {
   useRemoveProductMutation,
   useAddOneProductMutation,
   useRemoveOneProductMutation,
+  useAddProductsInServerMutation,
+  useGetProductsServerQuery,
 } = cartProducts;

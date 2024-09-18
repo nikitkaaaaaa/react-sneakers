@@ -9,6 +9,11 @@
   font-family: "Montserrat", sans-serif;
 }
 
+html{
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
 .container{
   width: 1400px;
   margin: auto;

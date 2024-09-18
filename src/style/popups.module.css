@@ -35,6 +35,14 @@
     border-radius: 15px;
 }
 
+.block_sending_products {
+    background: white;
+    position: relative;
+    width: 350px;
+    padding: 20px 20px 40px 20px;
+    border-radius: 15px;
+}
+
 .dot{
     margin: 8px 0px;
 }
