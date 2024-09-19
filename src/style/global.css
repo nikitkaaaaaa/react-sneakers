@@ -9,10 +9,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
-html{
+/* html{
   scroll-behavior: smooth;
   overflow-y: scroll;
-}
+} */
 
 .container{
   width: 1400px;

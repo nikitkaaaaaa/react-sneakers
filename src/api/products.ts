@@ -8,10 +8,14 @@ export const products = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query<
       InterfaceProducts[],
-      { choise: string; category: string }
+      { choise: string; category: string; currentBrands: string[] }
     >({
-      query: ({ choise, category }) =>
-        `products?sortBy=${choise}&category=${category}`,
+      query: ({ choise, category, currentBrands }) => {
+        const brandsQuery = currentBrands
+          .map((brand) => `brand[]=${brand}`)
+          .join("&");
+        return `products?sortBy=${choise}&category=${category}&${brandsQuery}`;
+      },
     }),
 
     getProductsBrand: builder.query<InterfaceProducts[], string>({

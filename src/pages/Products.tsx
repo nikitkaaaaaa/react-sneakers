@@ -8,12 +8,12 @@ import Card from "../componets/card/Card";
 import { routes } from "../routes/routes";
 import ChoiseBrand from "../componets/ChoiseBrand/ChoiseBrand";
 
-interface ProductsProps {}
+const Products = () => {
+  const [parent] = useAutoAnimate();
 
-const Products = (props: ProductsProps) => {
   const [choise, setChoise] = useState<string>("-price");
 
-  const [parent, enableAnimations] = useAutoAnimate();
+  const [currentBrands, setCurrentBrands] = useState<string[]>([]);
 
   const location = useLocation();
 
@@ -21,19 +21,13 @@ const Products = (props: ProductsProps) => {
 
   const category = location.state?.category;
 
-  useEffect(() => {
-    if (category === "Sport sneakers") {
-      setCategoryProductsRU("Обувь для спорта");
-    } else if (category == "Custom sneakers") {
-      setCategoryProductsRU("Кастомные кросовки");
-    } else if (category == "Street sneakers") {
-      setCategoryProductsRU("Кроссовки и кеды");
-    }
-  }, [category]);
+  const { data = [], isLoading } = useGetProductsQuery({
+    choise,
+    category,
+    currentBrands,
+  });
 
-  const { data = [], isLoading } = useGetProductsQuery({ choise, category });
-
-  const brands: string[] = [
+  const allBrands: string[] = [
     "Vans",
     "Jordan",
     "Nike",
@@ -42,13 +36,36 @@ const Products = (props: ProductsProps) => {
     "Reebok",
   ];
 
+  const filteredBrands =
+    category === "Sport sneakers"
+      ? allBrands.filter((brand) => brand !== "Vans")
+      : allBrands;
+
+  const handleBrandChange = (brand: string) => {
+    if (currentBrands.includes(brand)) {
+      setCurrentBrands(currentBrands.filter((b) => b !== brand));
+    } else {
+      setCurrentBrands([...currentBrands, brand]);
+    }
+  };
+
+  useEffect(() => {
+    if (category === "Sport sneakers") {
+      setCategoryProductsRU("Обувь для спорта");
+    } else if (category === "Custom sneakers") {
+      setCategoryProductsRU("Кастомные кроссовки");
+    } else if (category === "Street sneakers") {
+      setCategoryProductsRU("Кроссовки и кеды");
+    }
+  }, [category]);
+
   if (isLoading)
     return <div className="text-center font-bold text-5xl">loading</div>;
 
   return (
     <>
       <div className="container">
-        <div className="text-gray-500  text-sm pt-10 pb-3">
+        <div className="text-gray-500 text-sm pt-10 pb-3">
           <Link to={routes.home}>Главная</Link> /{" "}
           <span>{categoryProductsRU}</span>
         </div>
@@ -61,10 +78,15 @@ const Products = (props: ProductsProps) => {
           <ChoiseBrand setChoise={setChoise} />
         </div>
         <div className="flex justify-between mt-3">
-          <div className=" w-[20%]">
-            {brands.map((brand) => (
+          <div className="w-[20%]">
+            {filteredBrands.map((brand) => (
               <div key={brand}>
-                <input type="checkbox" id={brand} />
+                <input
+                  type="checkbox"
+                  id={brand}
+                  onChange={() => handleBrandChange(brand)}
+                  checked={currentBrands.includes(brand)}
+                />
                 <label htmlFor={brand} className="ml-3">
                   {brand}
                 </label>
