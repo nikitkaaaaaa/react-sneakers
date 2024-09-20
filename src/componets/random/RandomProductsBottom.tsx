@@ -3,12 +3,12 @@ import React from "react";
 import style from "../../style/home.module.css";
 import { getRandomProducts } from "./randomProductsFunc";
 import Card from "../card/Card";
-import { useGetRandomProductsQuery } from "../../api/products";
+import { useGetProductsQuery } from "../../api/products";
 
 interface RundomProductsBottomProps {}
 
 const RandomProductsBottom = (props: RundomProductsBottomProps) => {
-  const { data = [] } = useGetRandomProductsQuery();
+  const { data = [] } = useGetProductsQuery({});
 
   const randomProducts = getRandomProducts(data, 10);
 

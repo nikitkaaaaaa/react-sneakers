@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import { getRandomProducts } from "./randomProductsFunc";
 import { routes } from "../../routes/routes";
-import { useGetRandomProductsQuery } from "../../api/products";
+import { useGetProductQuery, useGetProductsQuery } from "../../api/products";
 
 interface RundomProductProps {}
 
 const RandomProduct = (props: RundomProductProps) => {
-  const { data } = useGetRandomProductsQuery();
+  const { data } = useGetProductsQuery({});
 
   if (!data || data.length === 0) return <div>No products available</div>;
 

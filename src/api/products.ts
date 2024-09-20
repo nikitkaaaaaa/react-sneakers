@@ -8,22 +8,33 @@ export const products = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query<
       InterfaceProducts[],
-      { choise: string; category: string; currentBrands: string[] }
+      {
+        choise?: string;
+        category?: string;
+        currentBrands?: string[];
+        priceFrom?: string;
+        priceTo?: string;
+      }
     >({
-      query: ({ choise, category, currentBrands }) => {
-        const brandsQuery = currentBrands
-          .map((brand) => `brand[]=${brand}`)
-          .join("&");
-        return `products?sortBy=${choise}&category=${category}&${brandsQuery}`;
+      query: ({ choise, category, currentBrands, priceFrom, priceTo }) => {
+        const params = new URLSearchParams();
+
+        if (choise) params.append("sortBy", choise);
+        if (category) params.append("category", category);
+        if (priceFrom) params.append("price[from]", priceFrom);
+        if (priceTo) params.append("price[to]", priceTo);
+        if (currentBrands && currentBrands.length > 0) {
+          currentBrands.forEach((brand) => {
+            params.append("brand[]", brand);
+          });
+        }
+
+        return `products?${params}`;
       },
     }),
 
     getProductsBrand: builder.query<InterfaceProducts[], string>({
       query: (brand) => `products?brand=${brand}`,
-    }),
-
-    getRandomProducts: builder.query<InterfaceProducts[], void>({
-      query: () => "/products",
     }),
 
     getProduct: builder.query<InterfaceProducts, number>({
@@ -35,6 +46,5 @@ export const products = createApi({
 export const {
   useGetProductsQuery,
   useGetProductsBrandQuery,
-  useGetRandomProductsQuery,
   useGetProductQuery,
 } = products;

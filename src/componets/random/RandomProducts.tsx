@@ -5,12 +5,12 @@ import style from "../../style/home.module.css";
 
 import { getRandomProducts } from "./randomProductsFunc";
 import { routes } from "../../routes/routes";
-import { useGetRandomProductsQuery } from "../../api/products";
+import { useGetProductsQuery } from "../../api/products";
 
 interface RandomProductsProps {}
 
 const RandomProducts = (props: RandomProductsProps) => {
-  const { data = [] } = useGetRandomProductsQuery();
+  const { data = [] } = useGetProductsQuery({});
 
   const randomProducts = getRandomProducts(data, 9);
 

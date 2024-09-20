@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import style from "../../style/cart.module.css";
-import { useGetRandomProductsQuery } from "../../api/products";
+import { useGetProductsQuery } from "../../api/products";
 import { getRandomProducts } from "./randomProductsFunc";
 import { routes } from "../../routes/routes";
 
 interface RandomProductsCartProps {}
 
 const RandomProductsCart = (props: RandomProductsCartProps) => {
-  const { data: products } = useGetRandomProductsQuery();
+  const { data } = useGetProductsQuery({});
 
-  const randomProducts = products ? getRandomProducts(products, 4) : [];
+  const randomProducts = data ? getRandomProducts(data, 4) : [];
 
   return (
     <div className=" flex mt-7 flex-wrap">
