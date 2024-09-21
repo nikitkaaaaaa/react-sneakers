@@ -7,10 +7,16 @@ import MotivationBlockHomePage from "../componets/motivationBlock/MotivationBloc
 import RandomProduct from "../componets/random/RandomProduct";
 import RandomProductsBottom from "../componets/random/RandomProductsBottom";
 import RandomProducts from "../componets/random/RandomProducts";
+import { useGetProductsQuery } from "../api/products";
+import Loading from "../componets/loading/Loading";
 
 interface HomeProps {}
 
 const Home = (props: HomeProps) => {
+  const { data = [], isLoading } = useGetProductsQuery({});
+
+  if (isLoading) return <Loading />;
+
   return (
     <div className="container">
       <div className={style.block_nav_categroy}>
@@ -52,7 +58,7 @@ const Home = (props: HomeProps) => {
       </div>
       <div className="mt-16">
         <div className="text-3xl font-bold mb-5">Только что купили</div>
-        <RandomProducts />
+        <RandomProducts data={data} />
       </div>
       <MotivationBlockHomePage />
       <RandomProduct />

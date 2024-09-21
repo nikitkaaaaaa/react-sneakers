@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+
 import {
   useAddProductsInServerMutation,
   useGetCartProductsQuery,
@@ -13,13 +14,14 @@ import SendingProductsPopup from "../componets/popups/SendingProductsPopup";
 import clear_cart from "../icons/clear_cart.svg";
 import { Link } from "react-router-dom";
 import { routes } from "../routes/routes";
+import Loading from "../componets/loading/Loading";
 
 interface CartProps {}
 
 const Cart = (props: CartProps) => {
   const [parent, enableAnimations] = useAutoAnimate();
 
-  const { data = [] } = useGetCartProductsQuery();
+  const { data = [], isLoading } = useGetCartProductsQuery();
 
   const [removeProduct] = useRemoveProductMutation();
 
@@ -61,6 +63,8 @@ const Cart = (props: CartProps) => {
       console.log(error);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container">

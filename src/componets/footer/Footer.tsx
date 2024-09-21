@@ -1,8 +1,10 @@
 import React from "react";
+import { useGetProductsQuery } from "../../api/products";
 
 interface FooterProps {}
 
 const Footer = (props: FooterProps) => {
+  const { data, isLoading } = useGetProductsQuery({});
   const store: string[] = [
     "МАГАЗИН",
     "Оплата",
@@ -43,61 +45,63 @@ const Footer = (props: FooterProps) => {
 
   return (
     <div className="mt-[265px] bg-black text-white">
-      <div className="container">
-        <div className="py-[60px]">
-          <div className="text-3xl mb-20">REACT SNEAKERS</div>
-          <div className=" flex flex-row gap-8">
-            <div className="flex flex-col gap-3 w-full pr-7 border-r border-r-gray-500">
-              {store.map((item, index) => (
-                <div
-                  key={index}
-                  className={` ${
-                    index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
-                  }`}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3 w-full pr-7 border-r border-r-gray-500">
-              {catalog.map((item, index) => (
-                <div
-                  key={index}
-                  className={` ${
-                    index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
-                  }`}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3  w-full pr-7 border-r border-r-gray-500">
-              {company.map((item, index) => (
-                <div
-                  key={index}
-                  className={` ${
-                    index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
-                  }`}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3  w-full pr-7 border-r border-r-gray-500">
-              {brands.map((item, index) => (
-                <div
-                  key={index}
-                  className={` ${
-                    index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
-                  }`}
-                >
-                  {item}
-                </div>
-              ))}
+      {!isLoading && (
+        <div className="container">
+          <div className="py-[60px]">
+            <div className="text-3xl mb-20">REACT SNEAKERS</div>
+            <div className=" flex flex-row gap-8">
+              <div className="flex flex-col gap-3 w-full pr-7 border-r border-r-gray-500">
+                {store.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` ${
+                      index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3 w-full pr-7 border-r border-r-gray-500">
+                {catalog.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` ${
+                      index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3  w-full pr-7 border-r border-r-gray-500">
+                {company.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` ${
+                      index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3  w-full pr-7 border-r border-r-gray-500">
+                {brands.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` ${
+                      index === 0 ? "text-xl text-white" : "text-[#7B8D9A]"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

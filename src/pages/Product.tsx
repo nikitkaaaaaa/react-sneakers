@@ -15,6 +15,7 @@ import {
 } from "../api/cartProducts";
 import AddedProductPopup from "../componets/popups/AddedProductPopup";
 import { routes } from "../routes/routes";
+import Loading from "../componets/loading/Loading";
 
 interface ProductProps {}
 
@@ -88,8 +89,7 @@ const Product = (props: ProductProps) => {
     }
   }, [data]);
 
-  if (isLoading)
-    return <div className="text-center font-bold text-5xl">loading</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container">

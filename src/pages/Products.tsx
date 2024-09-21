@@ -8,6 +8,7 @@ import Card from "../componets/card/Card";
 import { routes } from "../routes/routes";
 import ChoiseBrand from "../componets/ChoiseBrand/ChoiseBrand";
 import empty_products from "../icons/empty_products.svg";
+import Loading from "../componets/loading/Loading";
 
 const Products = () => {
   const [parent] = useAutoAnimate();
@@ -77,10 +78,7 @@ const Products = () => {
     }
   }, [category]);
 
-  if (isLoading)
-    return (
-      <div className="text-center font-bold text-5xl h-[100vh]">loading</div>
-    );
+  if (isLoading) return <Loading />;
 
   return (
     <>
