@@ -11,16 +11,25 @@ export const products = createApi({
       {
         choise?: string;
         category?: string;
+        title?: string;
         currentBrands?: string[];
         priceFrom?: string;
         priceTo?: string;
       }
     >({
-      query: ({ choise, category, currentBrands, priceFrom, priceTo }) => {
+      query: ({
+        choise,
+        category,
+        title,
+        currentBrands,
+        priceFrom,
+        priceTo,
+      }) => {
         const params = new URLSearchParams();
 
         if (choise) params.append("sortBy", choise);
         if (category) params.append("category", category);
+        if (title) params.append("title", title);
         if (priceFrom) params.append("price[from]", priceFrom);
         if (priceTo) params.append("price[to]", priceTo);
         if (currentBrands && currentBrands.length > 0) {

@@ -6,6 +6,7 @@ import InterfaceProducts from "../../inerface/InterfaceProducts";
 
 interface CardProps extends InterfaceProducts {
   closePopup?: () => void;
+  closeSearch?: () => void;
 }
 
 const Card = ({
@@ -13,8 +14,7 @@ const Card = ({
   imageUrl,
   price,
   title,
-  brand,
-  peculiarities,
+  closeSearch,
   closePopup,
 }: CardProps) => {
   return (
@@ -23,6 +23,7 @@ const Card = ({
       onClick={() => {
         window.scrollTo({ top: 0 });
         closePopup && closePopup();
+        closeSearch && closeSearch();
       }}
     >
       <img src={imageUrl[0]} alt={title} />

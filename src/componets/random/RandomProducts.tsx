@@ -19,6 +19,9 @@ const RandomProducts = (props: RandomProductsProps) => {
       {randomProducts.map((item) => (
         <Link
           to={routes.product.replace(":id", String(item.id))}
+          onClick={() => {
+            window.scrollTo({ top: 0 });
+          }}
           style={{ whiteSpace: "break-spaces" }}
           className="w-[150px]"
           key={item.id}
