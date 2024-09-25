@@ -7,6 +7,7 @@ import { useGetProductsQuery } from "../../api/products";
 import Card from "../card/Card";
 import { getRandomProducts } from "../random/randomProductsFunc";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import InterfaceProducts from "../../inerface/InterfaceProducts";
 
 interface SearchProductsProps {
   showSearch: boolean;
@@ -20,6 +21,8 @@ const SearchProducts = ({ showSearch, closeSearch }: SearchProductsProps) => {
 
   const { data = [] } = useGetProductsQuery({ title: `*${value.trim()}` });
 
+  const [randomProducts, setRandomProducts] = useState<InterfaceProducts[]>([]);
+
   const allBrands: string[] = [
     "Vans",
     "Jordan",
@@ -28,8 +31,6 @@ const SearchProducts = ({ showSearch, closeSearch }: SearchProductsProps) => {
     "Reebok",
     "New Balance",
   ];
-
-  const randomProducts = getRandomProducts(data, 4);
 
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +58,12 @@ const SearchProducts = ({ showSearch, closeSearch }: SearchProductsProps) => {
       };
     }
   }, [showSearch, closeSearch]);
+
+  useEffect(() => {
+    if (data.length && randomProducts.length === 0) {
+      setRandomProducts(getRandomProducts(data, 4));
+    }
+  }, [data, randomProducts.length]);
 
   return (
     <div>

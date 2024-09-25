@@ -18,7 +18,10 @@ const RandomProduct = (props: RundomProductProps) => {
     <div className="mt-[150px]">
       <div className="text-3xl">Товар дня</div>
       <div className="flex justify-center">
-        <Link to={routes.product.replace(":id", String(randomProduct.id))}>
+        <Link
+          to={routes.product.replace(":id", String(randomProduct.id))}
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
           <img
             src={randomProduct.imageUrl[0]}
             alt={randomProduct.title}
@@ -29,13 +32,17 @@ const RandomProduct = (props: RundomProductProps) => {
           <Link
             to={routes.product.replace(":id", String(randomProduct.id))}
             className="text-2xl w-[300px] h-[80px]"
+            onClick={() => window.scrollTo({ top: 0 })}
           >
             {randomProduct.title}
           </Link>
           <div className="font-bold mt-5 text-xl">
             {data && data[0].price} ₽
           </div>
-          <Link to={routes.product.replace(":id", String(randomProduct.id))}>
+          <Link
+            to={routes.product.replace(":id", String(randomProduct.id))}
+            onClick={() => window.scrollTo({ top: 0 })}
+          >
             <button className="border border-black px-7 py-2 rounded-md my-10">
               Подробнее
             </button>

@@ -7,7 +7,6 @@ import ProductSizePopup from "../componets/popups/ProductSizePopup";
 import ProductInfoPopup from "../componets/popups/ProductInfoPopup";
 import MotivationBlockProductPage from "../componets/motivationBlock/MotivationBlockProductPage";
 import Card from "../componets/card/Card";
-import { getRandomProducts } from "../componets/random/randomProductsFunc";
 import { useGetProductQuery, useGetProductsBrandQuery } from "../api/products";
 import {
   useAddProductMutation,
@@ -16,6 +15,7 @@ import {
 import AddedProductPopup from "../componets/popups/AddedProductPopup";
 import { routes } from "../routes/routes";
 import Loading from "../componets/loading/Loading";
+import BannerSmallScreenImgProduct from "../componets/smallScreen/bannerSmallScreenImgProduct/BannerSmallScreenImgProduct";
 
 interface ProductProps {}
 
@@ -29,8 +29,6 @@ const Product = (props: ProductProps) => {
   const { data: cartProducts } = useGetCartProductsQuery();
 
   const [addProductToCart] = useAddProductMutation();
-
-  const randomProducts = productsBrand && getRandomProducts(productsBrand, 10);
 
   const sizeProduct: number[] = [
     38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 45.5, 46, 47.5,
@@ -111,22 +109,27 @@ const Product = (props: ProductProps) => {
       />
       <div className={style.product}>
         <div className={style.product_left_side}>
-          <img src={currentimage} alt={data?.title} />
-          <div className="flex gap-3.5 mt-5">
-            {data?.imageUrl.map((item, index) => (
-              <img
-                key={index}
-                src={item}
-                className={`w-[152px] py-[3px] px-[30px] rounded-lg ${
-                  currentimage === item
-                    ? "border-2 border-black"
-                    : "border-2 border-white"
-                }`}
-                onClick={() => setCurrentImage(item)}
-              ></img>
-            ))}
+          <img src={currentimage} alt={data?.title} className="" />
+          <div className="w-full  mt-5">
+            <div className={style.block_some_img_product}>
+              {data?.imageUrl.map((item, index) => (
+                <img
+                  key={index}
+                  src={item}
+                  className={`${style.product_block_some_img_product} ${
+                    currentimage === item
+                      ? "border-2 border-black"
+                      : "border-2 border-white"
+                  }`}
+                  onClick={() => setCurrentImage(item)}
+                ></img>
+              ))}
+            </div>
           </div>
         </div>
+        {/* продукт при маленьком экране */}
+        <BannerSmallScreenImgProduct imgUrl={data?.imageUrl} />
+        {/* продукт при маленьком экране */}
 
         <div className={style.product_rigth_side}>
           <div className="font-bold text-3xl">{data?.title}</div>
@@ -221,7 +224,7 @@ const Product = (props: ProductProps) => {
       <hr className="mt-6 mb-10" />
       <div className="font-bold text-xl">{data?.brand}</div>
       <div className={style.brand_block}>
-        {randomProducts?.slice(0, 10).map((item) => (
+        {productsBrand?.slice(0, 10).map((item) => (
           <Card
             key={item.id}
             {...item}

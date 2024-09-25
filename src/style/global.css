@@ -9,12 +9,18 @@
   font-family: "Montserrat", sans-serif;
 }
 
-/* html{
+html{
   scroll-behavior: smooth;
   overflow-y: scroll;
-} */
+}
 
 .container{
-  width: 1400px;
+  max-width: 1400px;
   margin: auto;
+}
+
+@media (max-width: 1400px) {
+  .container{
+    padding: 0px 20px;
+  }
 }

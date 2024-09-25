@@ -9,11 +9,32 @@
 
 .product_rigth_side{
     width: 50%;
-    
     padding-top: 40px;
     margin-right: 25px;
     margin-left: 73px;
 }
+
+.product_baner_img{
+    display : none;
+}
+
+.block_some_img_product{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px 8px;
+    width: 100%;
+}
+
+.product_block_some_img_product{
+    width: calc((100% - 24px) / 4);
+    display: flex;
+    position: relative;
+    border-radius: 8px;
+    padding: 3px 20px
+}
+
+
 
 .info_for_sneakers{
     overflow: hidden;
@@ -21,7 +42,6 @@
     display: -webkit-box;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
-
 }
 
 .dot{
@@ -46,3 +66,37 @@
     gap: 20px;
 }
 
+@media (max-width: 992px) {
+    .brand_block{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .product_block_some_img_product{
+        padding: 0px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product{
+        flex-direction: column;
+        border: 0px solid;
+    }
+
+    .product_left_side{
+        display: none;
+    }
+
+    .product_baner_img{
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .product_rigth_side{
+        width: 100%;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .brand_block{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

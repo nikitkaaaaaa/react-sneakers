@@ -23,7 +23,7 @@ const App = () => {
           <Route path={routes.cart} element={<Cart />}></Route>
         </Routes>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
