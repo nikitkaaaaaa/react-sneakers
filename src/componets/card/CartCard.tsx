@@ -12,6 +12,7 @@ import {
 import InterfaceCartProducts from "../../inerface/InterfaceCartProducts";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes/routes";
+import CartCardSmallScreen from "../smallScreen/cartCardSmallScreen/CartCardSmallScreen";
 
 const CartCard = ({
   id,
@@ -59,46 +60,62 @@ const CartCard = ({
   };
 
   return (
-    <div className={`flex items-center py-6 ${style["cart-card"]}`}>
-      <Link
-        to={routes.product.replace(":id", String(parentId))}
-        onClick={() => {
-          window.scrollTo({ top: 0 });
-        }}
-      >
-        <img src={imageUrl[0]} alt={title} className="w-[110px]" />
-      </Link>
-      <div className="ml-5 w-full flex justify-between items-center">
-        <div>
-          <Link
-            to={routes.product.replace(":id", String(parentId))}
-            onClick={() => {
-              window.scrollTo({ top: 0 });
-            }}
-          >
-            <div className="w-[390px]">{title}</div>
-          </Link>
+    <>
+      <CartCardSmallScreen
+        parentId={parentId}
+        imageUrl={imageUrl}
+        title={title}
+        id={id}
+        size={size}
+        count={count}
+        price={price}
+        handleAddOneProduct={handleAddOneProduct}
+        handleRemoveOneProduct={handleRemoveOneProduct}
+        removeProduct={removeProduct}
+      />
 
-          <div className="mt-1 text-gray-500">Размер: {size}</div>
+      <div className={style.cart_card}>
+        <Link
+          to={routes.product.replace(":id", String(parentId))}
+          onClick={() => {
+            window.scrollTo({ top: 0 });
+          }}
+        >
+          <img src={imageUrl[0]} alt={title} className="w-[110px]" />
+        </Link>
+
+        <div className="ml-5 w-full flex justify-between items-center">
+          <div>
+            <Link
+              to={routes.product.replace(":id", String(parentId))}
+              onClick={() => {
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              <div className={style.title_product}>{title}</div>
+            </Link>
+
+            <div className="mt-1 text-gray-500">Размер: {size}</div>
+          </div>
+          <div className={style.block_button_cart}>
+            <button onClick={handleRemoveOneProduct}>
+              <img src={minus} alt="minus" />
+            </button>
+            <div>{count}</div>
+            <button onClick={handleAddOneProduct}>
+              <img src={plus} alt="plus" />
+            </button>
+          </div>
+          <div className="font-bold w-[120px] ">{price * count} ₽</div>
+          <img
+            src={deleteItem}
+            alt="deleteItem"
+            className="cursor-pointer"
+            onClick={() => removeProduct(id)}
+          />
         </div>
-        <div className={style.block_button_cart}>
-          <button onClick={handleRemoveOneProduct}>
-            <img src={minus} alt="minus" />
-          </button>
-          <div>{count}</div>
-          <button onClick={handleAddOneProduct}>
-            <img src={plus} alt="plus" />
-          </button>
-        </div>
-        <div className="font-bold w-[120px] ">{price * count} ₽</div>
-        <img
-          src={deleteItem}
-          alt="deleteItem"
-          className="cursor-pointer"
-          onClick={() => removeProduct(id)}
-        />
       </div>
-    </div>
+    </>
   );
 };
 

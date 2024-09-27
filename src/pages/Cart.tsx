@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 
+import style from "../style/cart.module.css";
 import {
   useAddProductsInServerMutation,
   useGetCartProductsQuery,
@@ -75,9 +76,9 @@ const Cart = (props: CartProps) => {
       />
       <div className="text-3xl mt-8 mb-5">Корзина</div>
       {data.length > 0 ? (
-        <div className="flex justify-between">
-          <div className="w-[78%]">
-            <div className="flex justify-between items-center border-t border-l border-r p-5">
+        <div className={style.cart}>
+          <div className={style.block_cart_left_side}>
+            <div className="flex justify-between items-center border-t border-l border-r  p-5">
               <div>Товары в корзине</div>
               <div
                 className="flex items-center cursor-pointer"
@@ -87,14 +88,13 @@ const Cart = (props: CartProps) => {
                 <img src={close} alt="clear cart" />
               </div>
             </div>
-            <hr />
-            <div className="px-5 border-l border-r border-b mb-36" ref={parent}>
+            <div className={style.block_products_cart} ref={parent}>
               {data.map((item) => (
                 <CartCard key={item.id} {...item} />
               ))}
             </div>
           </div>
-          <div className="w-[22%] border ml-8 px-5 py-4 h-[177.7px]">
+          <div className={style.block_cart_right_side}>
             <div className="flex justify-between items-center font-bold text-xl">
               <div>Итого:</div>
               <div>{totalPrice} ₽</div>
@@ -133,7 +133,7 @@ const Cart = (props: CartProps) => {
           </div>
         </div>
       )}
-      <div className="text-xl mt-8">Персональные рекомендации</div>
+      <div className="text-xl mt-16 mb-5">Персональные рекомендации</div>
       <RandomProductsCart />
     </div>
   );

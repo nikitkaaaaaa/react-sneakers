@@ -1,3 +1,28 @@
+.cart{
+    display: flex;
+    justify-content: space-between;
+}
+
+.block_cart_left_side{
+    width: 74%;   
+}
+
+.block_cart_right_side{
+    width: 26%;
+    border: 1px solid #E5E7EB;
+    margin-left: 32px;
+    padding: 16px 20px;
+    height: 177.7px;
+}
+
+.block_products_cart{
+    padding: 0px 20px;
+    border-left: 1px solid #E5E7EB;
+    border-right: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
+
+}
+
 .block_button_cart{
     border: 1px solid #E5E7EB;
     display: flex;
@@ -7,16 +32,88 @@
     width: 100px;
 }
 
-.cart-card:not(:first-child) {
+.cart_card{
+    display: flex;             
+    align-items: center;      
+    padding-top: 24px;        
+    padding-bottom: 24px;     
+
+}
+
+.cart_card:not(:first-child) {
     border-top: 1px solid #E5E7EB; 
+}
+
+.cart_card_small_screen{
+    display: none;
+}
+
+.block_product_recommendations{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 15px;
 }
 
 .product_recommendations {
     display: flex;
-    border-left: 1px solid #E5E7EB;
-    border-top: 1px solid #E5E7EB;
-    border-bottom: 1px solid #E5E7EB;
-    padding: 20px 0px 0px 20px;
-    width: 350px;
-    height: 150px;
+    border: 1px solid #E5E7EB;
+    padding: 10px 10px 15px 10px;
+   
+}
+
+.title_product{
+    width: 220px;
+}
+
+
+@media (max-width: 992px) {
+    .cart{
+        flex-direction: column;
+    }
+
+    .block_cart_left_side{
+        width: 100%;   
+    }
+    
+    .block_cart_right_side{
+        width: 100%;
+        margin-left: 0px;
+        border: 1px solid #E5E7EB;
+    }
+
+    .block_cart_right_side button{
+        padding: 8px 0px;
+    }
+
+    .block_products_cart{
+        margin-bottom: 30px;
+    }
+
+    .block_product_recommendations{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .title_product{
+        width: 130px;
+    }
+}
+
+@media (max-width: 576px) {
+    .cart_card{
+        display: none;
+    }
+
+    .cart_card_small_screen{
+        display: flex;   
+        padding-top: 24px;        
+        border-top: 1px solid #E5E7EB;
+        padding-bottom: 24px;  
+        flex-direction: column;
+    }
+    .block_product_recommendations{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

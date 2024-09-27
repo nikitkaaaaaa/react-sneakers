@@ -14,25 +14,24 @@ const RandomProductsCart = (props: RandomProductsCartProps) => {
   const randomProducts = data ? getRandomProducts(data, 4) : [];
 
   return (
-    <div className=" flex mt-7 flex-wrap">
+    <div className={style.block_product_recommendations}>
       {randomProducts.map((item, index) => (
         <Link
+          onClick={() => window.scrollTo({ top: 0 })}
           to={routes.product.replace(":id", String(item.id))}
           key={item.id}
           className={`${style.product_recommendations} ${
             index === randomProducts.length - 1 && "border-r"
           }`}
         >
-          <div className="w-[100px] h-[100px] mt-2">
-            <img
-              src={item.imageUrl[0]}
-              alt={item.title}
-              className="w-[100px] "
-            />
+          <div className="max-w-[110px] max-h-[120px] mt-2">
+            <img src={item.imageUrl[0]} alt={item.title} className="w-full" />
           </div>
-          <div className="ml-6">
+          <div className="ml-3">
             <div>{item.title}</div>
-            <div className="mt-2 text-sm text-gray-500 ">{item.price}</div>
+            <div className="mt-2 text-sm text-gray-500 font-bold">
+              {item.price} ₽
+            </div>
           </div>
         </Link>
       ))}

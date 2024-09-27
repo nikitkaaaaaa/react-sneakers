@@ -39,8 +39,9 @@ const MotivationBlockHomePage = (props: MotivationBlockHomePageProps) => {
         "Мы внимательно следим за рынком лимитированных вещей и предлагаем лучшие условия нашим клиентам.",
     },
   ];
+
   return (
-    <div className="mt-32">
+    <div className="mt-10">
       <div className="text-3xl">Мультибрендовый магазин REACT SNEAKERS</div>
       <div className="my my-10">
         <div>REACT SNEAKERS — ваш источник уникальных кроссовок</div>
@@ -49,7 +50,7 @@ const MotivationBlockHomePage = (props: MotivationBlockHomePageProps) => {
       </div>
       <div className={style.block_motivation}>
         {infoMotivationBlock.map((item, index) => (
-          <div className=" flex items-start" key={index}>
+          <div className="flex items-start" key={index}>
             <img src={item.image} alt="img" />
             <div className="ml-5">
               <div className="text-xl">{item.title}</div>

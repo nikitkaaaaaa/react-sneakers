@@ -13,11 +13,11 @@ const RandomProductsBottom = (props: RundomProductsBottomProps) => {
   const randomProducts = getRandomProducts(data, 10);
 
   return (
-    <div className="mt-[180px]">
-      <div className="text-center text-3xl font-bold">
-        Огромное колличестов кроссовок в каталоге
+    <div className="mt-[80px]">
+      <div className="text-center text-3xl font-bold pb-2 ">
+        Огромное колличество кроссовок
       </div>
-      <div className="text-center text-xl m-auto w-[65%] mt-4">
+      <div className={style.text_block_rundom_products_bottom}>
         В REACT SNEAKERS есть такие бренды кроссовок как: Vans, Jordan, New
         Balance, Nike, Asics, Reebok. Разные расцветки от классических до редких
         коллекционные вариантов.
