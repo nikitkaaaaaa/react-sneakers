@@ -47,26 +47,24 @@ const SendingProductsPopup = ({
     <div>
       {showSendingPopup && (
         <div className={style.blur} onClick={handleClickOutside}>
-          <div className={style.popup}>
-            <div className={style.block_sending_products}>
-              <img
-                onClick={closePopup}
-                src={close}
-                alt="close popup"
-                className="absolute top-10 right-[-40px] cursor-pointer"
-              />
-              <div className="text-center">
-                <div className="flex justify-center">
-                  <img src={sending} alt="sending" />
-                </div>
-                <div className="text-3xl font-bold my-5">Заказ оформлен!</div>
-                <div className="text-gray-500">
-                  Ваш заказ{" "}
-                  <span className="text-black font-bold">
-                    #{data[data.length - 1].id}{" "}
-                  </span>
-                  успешно оформлен. Ожидайте товар.
-                </div>
+          <div className={style.block_sending_products}>
+            <img
+              onClick={closePopup}
+              src={close}
+              alt="close popup"
+              className="absolute top-10 right-[-40px] cursor-pointer"
+            />
+            <div className="text-center">
+              <div className="flex justify-center">
+                <img src={sending} alt="sending" />
+              </div>
+              <div className="text-3xl font-bold my-5">Заказ оформлен!</div>
+              <div className="text-gray-500">
+                Ваш заказ{" "}
+                <span className="text-black font-bold">
+                  #{data[data.length - 1].id}{" "}
+                </span>
+                успешно оформлен. Ожидайте товар.
               </div>
             </div>
           </div>

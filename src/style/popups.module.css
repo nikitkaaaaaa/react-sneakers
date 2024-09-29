@@ -37,7 +37,13 @@
 
 .block_sending_products {
     background: white;
-    position: relative;
+    position: fixed; 
+    z-index: 3;
+    background-color: white;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    border-radius: 15px;
     width: 350px;
     padding: 20px 20px 40px 20px;
     border-radius: 15px;
@@ -65,7 +71,7 @@
     margin: 40px;
     padding: 20px;
     position: fixed;
-    top: 00px;
+    top: 0px;
     right: -100%; 
     background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -86,4 +92,30 @@
     opacity: 0;
     transform: translateX(100%);
     right: -100%; 
-  }
+}
+
+.popup {
+    display: flex;
+    position: fixed; 
+    z-index: 3;
+    background-color: white;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    border-radius: 15px;
+}
+
+@media (max-width: 576px) {
+    .popup{
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        transform: translate(-50%, 0%);
+        overflow-y: scroll;
+        border-radius: 15px 15px 0px 0px;
+    }
+
+    .block_sending_products{
+        width: 220px;
+    }
+}
