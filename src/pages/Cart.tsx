@@ -48,16 +48,16 @@ const Cart = (props: CartProps) => {
   };
 
   const handleAddProductsInServer = async () => {
-    try {
-      const products = data.map((item) => ({
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        size: item.size,
-        count: item.count,
-      }));
+    const products = data.map((item) => ({
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      imageUrl: item.imageUrl,
+      size: item.size,
+      count: item.count,
+    }));
 
+    try {
       await AddProductsInServer({ products, price: totalPrice }).unwrap();
       setShowSendingPopup(true);
     } catch (error) {

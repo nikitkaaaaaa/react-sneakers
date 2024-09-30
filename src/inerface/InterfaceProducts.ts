@@ -3,6 +3,6 @@ export default interface InterfaceProducts {
   imageUrl: string[];
   price: number;
   title: string;
-  brand: string;
-  peculiarities: string[];
+  brand?: string;
+  peculiarities?: string[];
 }

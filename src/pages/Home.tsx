@@ -38,6 +38,7 @@ const Home = (props: HomeProps) => {
       category: "Custom sneakers",
     },
   ];
+
   if (isLoading) return <Loading />;
 
   return (

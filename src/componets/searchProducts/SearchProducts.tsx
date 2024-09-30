@@ -99,7 +99,7 @@ const SearchProducts = ({ showSearch, closeSearch }: SearchProductsProps) => {
                 </button>
               </div>
               <div className="mt-4 flex justify-between">
-                <div className={style.left_side_search_block}>
+                <div className=" w-[20%]">
                   <div className="font-bold mb-2">Часто ищут</div>
                   <div>
                     {allBrands.map((item, index) => (
@@ -118,7 +118,7 @@ const SearchProducts = ({ showSearch, closeSearch }: SearchProductsProps) => {
                     ))}
                   </div>
                 </div>
-                <div className={style.right_side_search_block}>
+                <div className="w-[80%]">
                   <div className="font-bold mb-2">Популярые товары</div>
                   <div className={style.search_products_block} ref={parent}>
                     {value.trim().length >= 3

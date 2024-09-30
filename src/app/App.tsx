@@ -9,6 +9,7 @@ import Product from "../pages/Product";
 import Home from "../pages/Home";
 import Cart from "../pages/Cart";
 import Footer from "../componets/footer/Footer";
+import Favorites from "../pages/Favorites";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path={routes.products} element={<Products />}></Route>
           <Route path={routes.product} element={<Product />}></Route>
           <Route path={routes.cart} element={<Cart />}></Route>
+          <Route path={routes.favorites} element={<Favorites />}></Route>
         </Routes>
       </div>
       {/* <Footer /> */}

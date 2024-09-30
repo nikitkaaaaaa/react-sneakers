@@ -16,6 +16,13 @@ import AddedProductPopup from "../componets/popups/AddedProductPopup";
 import { routes } from "../routes/routes";
 import Loading from "../componets/loading/Loading";
 import BannerSmallScreenImgProduct from "../componets/smallScreen/bannerSmallScreenImgProduct/BannerSmallScreenImgProduct";
+import {
+  useAddProductToFavoritesMutation,
+  useGetFavoritesProductsQuery,
+  useRemoveProductsToFavoritesMutation,
+} from "../api/favoritesProducts";
+import favorites_false from "../icons/favorites_false.svg";
+import favorites_true from "../icons/favorites_true.svg";
 
 interface ProductProps {}
 
@@ -28,7 +35,13 @@ const Product = (props: ProductProps) => {
 
   const { data: cartProducts } = useGetCartProductsQuery();
 
+  const { data: favoritesProducts } = useGetFavoritesProductsQuery();
+
   const [addProductToCart] = useAddProductMutation();
+
+  const [addProductToFavorites] = useAddProductToFavoritesMutation();
+
+  const [removeProductsToFavorites] = useRemoveProductsToFavoritesMutation();
 
   const sizeProduct: number[] = [
     38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 45.5, 46, 47.5,
@@ -59,6 +72,15 @@ const Product = (props: ProductProps) => {
 
   const [addedProduct, setAddedProduct] = useState<boolean>(false);
 
+  const isAdded = cartProducts?.find(
+    (item) =>
+      item.parentId === Number(id) && item.size === sizeProduct[currentSize]
+  );
+
+  const isFavorite = favoritesProducts?.find(
+    (item) => item.parentId === Number(id)
+  );
+
   const handleAddProductToCart = async () => {
     if (!data) {
       return;
@@ -78,6 +100,35 @@ const Product = (props: ProductProps) => {
       await addProductToCart(product).unwrap();
     } catch (error) {
       alert(`Error adding product to cart: ${error}`);
+    }
+  };
+
+  const handleAddOrRemoveProductToFavorites = async (
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!isFavorite) {
+      if (!data) return;
+      try {
+        const product = {
+          id: Number(id),
+          parentId: Number(id),
+          title: data.title,
+          price: data.price,
+          imageUrl: data.imageUrl[0],
+        };
+        await addProductToFavorites(product).unwrap();
+      } catch (error) {
+        console.error("Error adding product to favorites:", error);
+      }
+    } else {
+      try {
+        await removeProductsToFavorites(Number(isFavorite.id)).unwrap();
+      } catch (error) {
+        console.error("Error removing product from favorites:", error);
+      }
     }
   };
 
@@ -132,11 +183,17 @@ const Product = (props: ProductProps) => {
         {/* продукт при маленьком экране */}
 
         <div className={style.product_rigth_side}>
+          <img
+            src={isFavorite ? favorites_true : favorites_false}
+            alt="favorites_false"
+            className="absolute top-0 right-0"
+            onClick={handleAddOrRemoveProductToFavorites}
+          />
           <div className="font-bold text-3xl">{data?.title}</div>
           <hr className="my-5" />
           <div>{data?.title} обладает следующими особенностями:</div>
           <ul className={style.info_for_sneakers}>
-            {data?.peculiarities.map((item, index) => (
+            {data?.peculiarities?.map((item, index) => (
               <li className={style.dot} key={index}>
                 {item}
               </li>
@@ -196,11 +253,7 @@ const Product = (props: ProductProps) => {
           <hr className="my-6" />
           <MotivationBlockProductPage />
 
-          {cartProducts?.find(
-            (item) =>
-              item.parentId === Number(id) &&
-              item.size === sizeProduct[currentSize]
-          ) ? (
+          {isAdded ? (
             <Link to={routes.cart}>
               <button
                 className="w-full bg-[#FF385C] text-white py-3 rounded-xl"

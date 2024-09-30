@@ -9,6 +9,7 @@
 
 .product_rigth_side{
     width: 50%;
+    position: relative;
     padding-top: 40px;
     margin-right: 25px;
     margin-left: 73px;
