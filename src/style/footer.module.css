@@ -1,0 +1,29 @@
+.footer{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+    height: auto;
+    align-items: stretch;
+}
+
+.footer_item{
+    display: flex;               
+    flex-direction: column;     
+    gap: 0.75rem;              
+    width: 100%;                 
+    padding-right: 1.75rem;      
+    border-right: 1px solid;     
+    border-color: #6b7280;
+
+}
+
+@media (max-width: 768px) {
+    .footer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer_item{
+        border-right: none;
+    }
+}

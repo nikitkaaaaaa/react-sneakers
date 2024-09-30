@@ -25,7 +25,7 @@ const App = () => {
           <Route path={routes.favorites} element={<Favorites />}></Route>
         </Routes>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

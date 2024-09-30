@@ -18,24 +18,6 @@ const Favorites = (props: FavoritesProps) => {
 
   return (
     <div className="container">
-      {/* <div className={style.block_products_favorites} ref={parent}>
-        {data.length >= 1 ? (
-          data.map((item) => <CardFavorites key={item.id} {...item} />)
-        ) : (
-          <div className=" border border-black">
-            <img
-              src={favorites_true}
-              alt="favorites_empty"
-              className="w-[200px]"
-            />
-            <div className="font-bold text-3xl">Избранные товары</div>
-            <div>
-              Тут вы будете видеть товары, которые лайкнули. Сихронизируется со
-              всеми устройствами. Это удобно!
-            </div>
-          </div>
-        )}
-      </div> */}
       <div>
         {data.length >= 1 ? (
           <div className={style.block_products_favorites} ref={parent}>
