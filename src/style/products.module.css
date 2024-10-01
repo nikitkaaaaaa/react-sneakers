@@ -49,6 +49,7 @@
         width: 100%;
         margin-left: 0px;
         gap: 8px;
+        margin-top: 20px;
     }
 
     .products_block_left_side,.block_filters_and_choise{

@@ -9,7 +9,10 @@ const ChoiseBrand = ({ setChoise }: ChoiseBrandProps) => {
     setChoise(e.target.value);
   };
   return (
-    <select className="outline-none" onChange={handleChoise}>
+    <select
+      className="outline-none border border-black"
+      onChange={handleChoise}
+    >
       <option value="-price">Подороже</option>
       <option value="price">Подешевле</option>
       <option value="-rating">По рейтенгу</option>

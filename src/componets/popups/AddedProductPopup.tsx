@@ -35,7 +35,7 @@ const AddedProductPopup = ({
   }, [addedProduct, handleClosePopupCart]);
 
   return (
-    <div>
+    <div className="">
       {addedProduct && (
         <div
           className={`${style.added_product} ${
@@ -54,7 +54,7 @@ const AddedProductPopup = ({
             </div>
             <div className="ml-5">
               <div className="font-bold mb-2">В корзине</div>
-              <div className="text-gray-600 w-[160px]">{title}</div>
+              <div className={style.title_added_product}>{title}</div>
             </div>
           </Link>
 

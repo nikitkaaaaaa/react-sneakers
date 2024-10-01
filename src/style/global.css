@@ -10,10 +10,10 @@
   /* outline: 1px solid green !important; */
 }
 
-html{
+/* html{
   scroll-behavior: smooth;
   overflow-y: scroll;
-}
+} */
 
 .container{
   max-width: 1400px;
