@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import style from "../style/home.module.css";
@@ -8,11 +8,16 @@ import RandomProductsBottom from "../componets/random/RandomProductsBottom";
 import RandomProducts from "../componets/random/RandomProducts";
 import { useGetProductsQuery } from "../api/products";
 import Loading from "../componets/loading/Loading";
+import { getRandomProducts } from "../componets/random/randomProductsFunc";
 
 interface HomeProps {}
 
 const Home = (props: HomeProps) => {
   const { data = [], isLoading } = useGetProductsQuery({});
+
+  const randomProducts1 = getRandomProducts(data, 9);
+
+  const randomProducts2 = getRandomProducts(data, 9);
 
   const itemsBlockNavCategroy: Array<{
     title: string;
@@ -60,12 +65,20 @@ const Home = (props: HomeProps) => {
       </div>
       <div className="mt-16">
         <div className={style.text_recomedation}>Только что купили</div>
-        <RandomProducts data={data} />
+        <div className={style.block_random_products}>
+          {randomProducts1.map((item) => (
+            <RandomProducts key={item.id} {...item} />
+          ))}
+        </div>
       </div>
       <MotivationBlockHomePage />
       <div className="mt-16">
         <div className={style.text_recomedation}>Товары дня</div>
-        <RandomProducts data={data} />
+        <div className={style.block_random_products}>
+          {randomProducts2.map((item) => (
+            <RandomProducts key={item.id} {...item} />
+          ))}
+        </div>
       </div>
       <RandomProductsBottom />
     </div>

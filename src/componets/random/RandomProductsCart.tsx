@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import style from "../../style/cart.module.css";
 import { useGetProductsQuery } from "../../api/products";
 import { getRandomProducts } from "./randomProductsFunc";
 import { routes } from "../../routes/routes";
+import InterfaceProducts from "../../inerface/InterfaceProducts";
 
 interface RandomProductsCartProps {}
 
 const RandomProductsCart = (props: RandomProductsCartProps) => {
   const { data } = useGetProductsQuery({});
 
-  const randomProducts = data ? getRandomProducts(data, 4) : [];
+  const [randomProducts, setRandomProducts] = useState<InterfaceProducts[]>([]);
+
+  useEffect(() => {
+    setRandomProducts(data ? getRandomProducts(data, 4) : []);
+  }, [data]);
 
   return (
     <div className={style.block_product_recommendations}>
