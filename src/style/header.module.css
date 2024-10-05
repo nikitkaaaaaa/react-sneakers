@@ -5,6 +5,12 @@
     justify-content: space-between;
 }
 
+.logo {
+    font-size: 24px;
+    line-height: 32px; 
+    font-weight: bold;
+}
+
 .number_of_favorites{
     position: absolute;
     background: #FF385C;
@@ -39,4 +45,11 @@
     line-height: 10px;
     text-align: center;
     letter-spacing: -.5px;
+}
+
+@media (max-width: 576px) {
+    .logo{
+        font-size: 16px  /* 20px */;
+    line-height: 24px  /* 28px */
+    }
 }

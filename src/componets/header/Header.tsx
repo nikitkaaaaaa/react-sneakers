@@ -16,9 +16,11 @@ const Header = (props: HeaderProps) => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
 
   const { data: favoritesProducts } = useGetFavoritesProductsQuery();
+
   const { data: cartProducts } = useGetCartProductsQuery();
 
   const numberOfFavorites = favoritesProducts?.length ?? 0;
+
   const numberOfCart = cartProducts?.length ?? 0;
 
   return (
@@ -34,7 +36,7 @@ const Header = (props: HeaderProps) => {
           className="cursor-pointer"
           onClick={() => setShowSearch(true)}
         />
-        <Link className="font-bold text-2xl" to={routes.home}>
+        <Link className={style.logo} to={routes.home}>
           REACT SNEAKERS
         </Link>
         <div className="flex items-center">

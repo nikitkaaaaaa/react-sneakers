@@ -28,7 +28,7 @@ const FilterSmallScreen = ({
   return (
     <div>
       {showFilterSmallScreen && (
-        <div className="fixed inset-0 z-10 bg-white p-5 border-2 border-black flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-10 bg-white p-5 flex flex-col overflow-hidden">
           <div className="flex justify-between items-center">
             <div className="font-bold text-4xl">ФИЛЬТРЫ</div>
             <img
